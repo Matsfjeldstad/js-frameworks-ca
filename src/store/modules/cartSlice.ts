@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getUniqueProductsWithQuantity } from '../../utils/cartUtils';
 
 interface Review {
   id: string;
@@ -34,25 +35,23 @@ const cartSlice = createSlice({
     // here we write the functions which will update the state
     ADD_PRODUCT_TO_CART: (state, action) => {
       // Check if the product is already in the cart                          is my product id available in the productsInCart []
-      const isProductInCart =
-        state.productsInCart && state.productsInCart.some((product) => product.id === action.payload.id);
+      // const isProductInCart =
+      //   state.productsInCart && state.productsInCart.some((product) => product.id === action.payload.id);
 
-      if (isProductInCart) {
-        // If the product is already in the cart, don't add it again
-      } else {
-        // If the product is not in the cart, add it to the cart
-        state.productsInCart = [...state.productsInCart, action.payload];
-        state.numberOfProductsInCart = state.productsInCart.length;
-      }
+      // If the product is not in the cart, add it to the cart
+      state.productsInCart = [...state.productsInCart, action.payload];
+      state.numberOfProductsInCart = getUniqueProductsWithQuantity(state.productsInCart).length;
     },
     REMOVE_PRODUCT_FROM_CART: (state, action) => {
       state.productsInCart = state.productsInCart.filter((product) => product.id !== action.payload);
-      state.numberOfProductsInCart = state.productsInCart.length;
+      state.numberOfProductsInCart = getUniqueProductsWithQuantity(state.productsInCart).length;
     },
   },
 });
 
 export default cartSlice.reducer;
+
+let age: Number;
 
 // Actions
 const { ADD_PRODUCT_TO_CART } = cartSlice.actions;
