@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function Header() {
   const { numberOfProductsInCart } = useSelector((state) => state.cart);
@@ -32,7 +32,7 @@ export default function Header() {
 
               {/*Cart*/}
               <div className="ml-4  lg:ml-6">
-                <a href="#" className="-m-2 flex items-center p-2 group">
+                <Link to="/cart" className="-m-2 flex items-center p-2 group">
                   <svg
                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     fill="none"
@@ -46,7 +46,7 @@ export default function Header() {
                     {numberOfProductsInCart}
                   </span>
                   <span className="sr-only">items in cart, view bag</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
