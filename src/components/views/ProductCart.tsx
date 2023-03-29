@@ -3,10 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeSingleProductFromCart } from '../../store/modules/cartSlice';
 import { Link } from 'react-router-dom';
 import { getUniqueProductsWithQuantity } from '../../utils/cartUtils';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 type Props = {};
 
 export default function ProductCart({}: Props) {
+  // AutoAnimate adds automatic animations to your JavaScript applications with a single line of code.
+  const [animationParent] = useAutoAnimate();
   const dispatch = useDispatch();
   const { productsInCart } = useSelector((state) => state.cart);
 
@@ -25,7 +28,7 @@ export default function ProductCart({}: Props) {
               <th className="text-right">Price</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody ref={animationParent}>
             {getUniqueProductsWithQuantity(productsInCart).map((product) => (
               <tr key={product.id} className="border-b">
                 <td className="flex flex-col gap-2 py-10">
