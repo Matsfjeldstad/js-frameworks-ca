@@ -1,9 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, TypedUseSelectorHook } from 'react-redux';
+import { RootState } from '../../store/store';
 import { Link, NavLink } from 'react-router-dom';
 
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 export default function Header() {
-  const { numberOfProductsInCart } = useSelector((state) => state.cart);
+  const { numberOfProductsInCart } = useAppSelector((state) => state.cart);
   return (
     <header className="sticky top-0 z-10 border-b border-gray-200 bg-white">
       <p className="flex h-10 items-center justify-center bg-gray-900 px-4 text-xs lg:text-sm font-medium text-white sm:px-6 lg:px-8">

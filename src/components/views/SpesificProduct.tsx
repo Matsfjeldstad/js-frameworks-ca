@@ -1,32 +1,31 @@
-// import React, { useEffect } from 'react';
-
-// import { useDispatch, useSelector } from 'react-redux';
-// import { fetchProductById, Product } from '../../store/modules/productsSlice';
-
-// ProductDetails.tsx
 import React from 'react';
-import { useGetProductByIdQuery } from '../../store/modules/apiSlice';
+import { addSingleProductToCart } from '../../store/modules/cartSlice';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addSingleProductToCart } from '../../store/modules/cartSlice';
+import { useGetProductByIdQuery } from '../../store/modules/apiSlice';
+import { AppDispatch } from '../../store/store';
 
 export const ProductDetails = ({ id }: { id: string }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { data: product, error, isLoading } = useGetProductByIdQuery(id);
 
   let discount: number = 0;
 
-  if (product) {
-    discount = product.discountedPrice - product.price;
-    console.log('discount', discount);
-  }
-
   if (isLoading) return <div>Loading...</div>;
+
   if (error) {
-    const errorMessage: string = error.data.errors[0].message;
-    return <div>Error: {errorMessage}</div>;
+    return <div>Error:</div>;
   }
 
+  if (!product) {
+    return (
+      <main className="flex flex-col sm:flex-row h-fit min-h-[calc(100vh_-_104px)] mx-auto max-w-2xl py-4 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        sorry...
+      </main>
+    );
+  }
+
+  discount = product.discountedPrice - product.price;
   return (
     <main className="flex flex-col sm:flex-row h-fit min-h-[calc(100vh_-_104px)] mx-auto max-w-2xl py-4 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <img src={product.imageUrl} className="bg-gray-100 h-[400px] w-full max-w-3xl object-contain rounded-xl "></img>
@@ -69,5 +68,6 @@ export const ProductDetails = ({ id }: { id: string }) => {
 
 export default function SpesificProduct() {
   let { id } = useParams();
-  return <ProductDetails id={id}></ProductDetails>;
+  if (id) return <ProductDetails id={id}></ProductDetails>;
+  return <main>404</main>;
 }

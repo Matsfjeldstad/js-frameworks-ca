@@ -1,6 +1,25 @@
-export function getUniqueProductsWithQuantity(products) {
-  const uniqueProducts = [];
+interface Review {
+  id: string;
+  username: string;
+  rating: number;
+  description: string;
+}
 
+interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  discountedPrice: number;
+  imageUrl: string;
+  rating: number;
+  tags: string[];
+  reviews: Review[];
+  quantity: number;
+}
+
+export function getUniqueProductsWithQuantity(products: Product[]) {
+  const uniqueProducts: Product[] = [];
   products.forEach((product) => {
     const existingProductIndex = uniqueProducts.findIndex((uniqueProduct) => uniqueProduct.id === product.id);
 

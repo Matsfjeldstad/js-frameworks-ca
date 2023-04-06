@@ -1,17 +1,18 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
 import { removeSingleProductFromCart } from '../../store/modules/cartSlice';
 import { Link } from 'react-router-dom';
 import { getUniqueProductsWithQuantity } from '../../utils/cartUtils';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { RootState, AppDispatch } from '../../store/store';
 
-type Props = {};
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export default function ProductCart({}: Props) {
+export default function ProductCart() {
   // AutoAnimate adds automatic animations to your JavaScript applications with a single line of code.
   const [animationParent] = useAutoAnimate();
-  const dispatch = useDispatch();
-  const { productsInCart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch<AppDispatch>();
+  const { productsInCart } = useAppSelector((state) => state.cart);
 
   return (
     <main className="h-fit min-h-[calc(100vh_-_104px)] mx-auto max-w-7xl p-8 flex">
@@ -37,7 +38,9 @@ export default function ProductCart({}: Props) {
                     <div className="font-medium text-lg">{product.title}</div>
                     <div className="text-gray-400 text-sm">#{product.id}</div>
                     <div
-                      onClick={() => dispatch(removeSingleProductFromCart(product.id))}
+                      onClick={() => {
+                        dispatch(removeSingleProductFromCart(product.id));
+                      }}
                       className="underline text-gray-500 cursor-pointer"
                     >
                       Remove item
