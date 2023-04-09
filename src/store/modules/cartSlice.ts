@@ -23,13 +23,17 @@ const cartSlice = createSlice({
       state.productsInCart = state.productsInCart.filter((product) => product.id !== action.payload);
       state.numberOfProductsInCart = state.productsInCart.length;
     },
+    CLEAR_CART: (state) => {
+      state.productsInCart = [];
+      state.numberOfProductsInCart = 0;
+    },
   },
 });
 
 export default cartSlice.reducer;
 
 // Actions
-export const { ADD_PRODUCT_TO_CART, REMOVE_PRODUCT_FROM_CART } = cartSlice.actions;
+export const { ADD_PRODUCT_TO_CART, REMOVE_PRODUCT_FROM_CART, CLEAR_CART } = cartSlice.actions;
 
 export const addSingleProductToCart = (productData: Product) => (dispatch: AppDispatch) => {
   console.log('productData: ', productData);
@@ -40,4 +44,7 @@ export const addSingleProductToCart = (productData: Product) => (dispatch: AppDi
 export const removeSingleProductFromCart = (productId: String) => (dispatch: AppDispatch) => {
   console.log('productId', productId);
   dispatch(REMOVE_PRODUCT_FROM_CART(productId));
+};
+export const clearCart = () => (dispatch: AppDispatch) => {
+  dispatch(CLEAR_CART());
 };
