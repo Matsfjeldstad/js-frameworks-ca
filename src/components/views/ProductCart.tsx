@@ -92,12 +92,14 @@ export default function ProductCart() {
             </div>
           </div>
         </div>
-        <button
-          disabled={!numberOfProductsInCart}
-          className="text-white bg-blue-600 px-8 py-4 rounded-lg w-full h-fit hover:bg-blue-500 duration-150 disabled:bg-slate-400"
-        >
-          Checkout
-        </button>
+        <Link to="/order-success">
+          <button
+            disabled={!numberOfProductsInCart}
+            className="text-white bg-blue-600 px-8 py-4 rounded-lg w-full h-fit hover:bg-blue-500 duration-150 disabled:bg-slate-400"
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </main>
   );
