@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useGetProductsQuery } from './../store/modules/apiSlice';
+import { useGetProductsQuery } from '../../store/modules/apiSlice';
 
 const MappedProducts = () => {
   const { data: products, error, isLoading } = useGetProductsQuery();
