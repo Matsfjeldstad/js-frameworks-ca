@@ -17,11 +17,11 @@ const cartSlice = createSlice({
   reducers: {
     ADD_PRODUCT_TO_CART: (state, action: PayloadAction<Product>) => {
       state.productsInCart = [...state.productsInCart, action.payload];
-      state.numberOfProductsInCart = getUniqueProductsWithQuantity(state.productsInCart).length;
+      state.numberOfProductsInCart = state.productsInCart.length;
     },
     REMOVE_PRODUCT_FROM_CART: (state, action: PayloadAction<String>) => {
       state.productsInCart = state.productsInCart.filter((product) => product.id !== action.payload);
-      state.numberOfProductsInCart = getUniqueProductsWithQuantity(state.productsInCart).length;
+      state.numberOfProductsInCart = state.productsInCart.length;
     },
   },
 });
