@@ -1,22 +1,4 @@
-interface Review {
-  id: string;
-  username: string;
-  rating: number;
-  description: string;
-}
-
-interface Product {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  discountedPrice: number;
-  imageUrl: string;
-  rating: number;
-  tags: string[];
-  reviews: Review[];
-  quantity: number;
-}
+import { Product } from '../store/interfaces';
 
 export function getUniqueProductsWithQuantity(products: Product[]) {
   const uniqueProducts: Product[] = [];
