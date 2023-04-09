@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, TypedUseSelectorHook } from 'react-redux';
 import { RootState } from '../../store/store';
 import { Link, NavLink } from 'react-router-dom';
@@ -12,6 +12,32 @@ export default function Header() {
 
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const { numberOfProductsInCart } = useAppSelector((state) => state.cart);
+
+  const searchModalRef = useRef<HTMLDivElement>(null);
+  const searchButtonRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchButtonRef.current &&
+        searchModalRef.current &&
+        !searchModalRef.current.contains(event.target as Node) &&
+        !searchButtonRef.current?.contains(event.target as Node)
+      ) {
+        setSearchModalOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const toggleSearchModal = () => {
+    setSearchModalOpen((prev) => !prev);
+  };
+
   return (
     <>
       <header ref={animationParent} className="sticky top-0 border-b z-50 border-gray-200 bg-white">
@@ -30,7 +56,8 @@ export default function Header() {
               </div>
               <div className="ml-auto flex items-center">
                 <div
-                  onClick={() => setSearchModalOpen(!searchModalOpen)}
+                  ref={searchButtonRef}
+                  onClick={toggleSearchModal}
                   className="mr-4 duration-150 rounded-md hover:scale-105 group p-2 hover:bg-gray-100 cursor-pointer"
                 >
                   <svg
@@ -78,9 +105,14 @@ export default function Header() {
             </div>
           </div>
         </nav>
-        {searchModalOpen && <SearchBar setSearchModalOpen={setSearchModalOpen} />}
+        {searchModalOpen && (
+          <div ref={searchModalRef}>
+            <SearchBar setSearchModalOpen={setSearchModalOpen} />
+          </div>
+        )}
         {/* {searchModalOpen && } */}
       </header>
+      {searchModalOpen && <div className="fixed z-10 bg-slate-900/40 backdrop-blur-md h-full w-full top-0 left-0" />}
     </>
   );
 }

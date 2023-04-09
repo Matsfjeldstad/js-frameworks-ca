@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useGetProductsQuery } from '../../store/modules/apiSlice';
 import { Product } from '../../store/interfaces';
 import { Link } from 'react-router-dom';
@@ -20,28 +20,12 @@ type SearchBarProps = {
 export default function SearchBar({ setSearchModalOpen }: SearchBarProps) {
   const { data: products } = useGetProductsQuery();
   const [searchState, setSearchState] = useState('');
-  const modalContentRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalContentRef.current && !modalContentRef.current.contains(event.target)) {
-        setSearchModalOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [setSearchModalOpen]);
 
   return (
     <div
-      className="w-full absolute h-screen bg-slate-900/40 backdrop-blur-md"
-      // onClick={() => setSearchModalOpen(false)}
+      className="w-full absolute"
     >
-      <div ref={modalContentRef} className="w-full bg-gray-800 p-4 relative lefo">
+      <div className="w-full bg-gray-800 p-4 relative lefo">
         <div className="max-w-lg mx-auto relative">
           <label
             htmlFor="search"
