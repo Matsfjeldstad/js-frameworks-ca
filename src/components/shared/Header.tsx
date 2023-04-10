@@ -75,11 +75,14 @@ export default function Header() {
                   </svg>
                 </div>
                 <div className="space-x-2 lg:space-x-6 flex flex-1 items-center justify-end">
-                  <NavLink to="/test" className="text-xs lg:text-sm font-medium text-gray-700 hover:text-gray-800">
+                  <NavLink to="/" className="text-xs lg:text-sm font-medium text-gray-700 hover:text-gray-800">
                     All Products
                   </NavLink>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true"></span>
-                  <NavLink to="/test" className="text-xs lg:text-sm font-medium text-gray-700 hover:text-gray-800">
+                  <NavLink
+                    to="/contact-us"
+                    className="text-xs lg:text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
                     Contact Us
                   </NavLink>
                 </div>
