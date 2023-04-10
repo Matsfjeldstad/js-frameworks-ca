@@ -32,7 +32,9 @@ export default function OrderSuccess({}: Props) {
           </div>
         </div>
         <Link to="/">
-          <button className="p-3 w-fit bg-green-400 rounded">Go Back Shopping</button>
+          <button className="p-3 duration-150 w-fit font-medium bg-green-400 rounded hover:scale-[1.02] hover:bg-green-300">
+            Go Back Shopping
+          </button>
         </Link>
       </div>
     </div>
