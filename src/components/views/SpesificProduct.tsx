@@ -11,7 +11,30 @@ export const ProductDetails = ({ id }: { id: string }) => {
 
   let discount: number = 0;
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <main className="flex flex-col sm:flex-row h-fit min-h-[calc(100vh_-_104px)] mx-auto max-w-2xl py-4 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="bg-gray-200 h-[400px] w-full max-w-3xl object-contain rounded-xl animate-pulse"></div>
+        <div className="p-6 h-fit flex flex-col gap-8">
+          <div className="w-40 h-10 bg-gray-200 animate-pulse"></div>
+          <div className="flex gap-4">
+            <span className="bg-gray-200 h-16 w-40 p-4 rounded-2xl font-bold relative"></span>
+          </div>
+          <button className="py-4 duration-200 px-6 bg-blue-700 hover:bg-blue-500 text-white rounded-xl group flex justify-center gap-2 w-fit">
+            add to cart
+            <svg
+              className="h-6 w-6 flex-shrink-0 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+            </svg>
+          </button>
+        </div>
+      </main>
+    );
 
   if (error) {
     return <div>Error:</div>;

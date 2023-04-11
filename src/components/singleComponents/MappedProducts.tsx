@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useGetProductsQuery } from '../../store/modules/apiSlice';
+import SkeletonLoaderGrid from './SkeletonLoaderGrid';
 
 const MappedProducts = () => {
   const { data: products, error, isLoading } = useGetProductsQuery();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <SkeletonLoaderGrid />;
   if (error) return <div>Error:</div>;
 
   return (

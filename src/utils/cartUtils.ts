@@ -4,6 +4,7 @@ export function getUniqueProductsWithQuantity(products: Product[]) {
   const uniqueProducts: Product[] = [];
   products.forEach((product) => {
     const existingProductIndex = uniqueProducts.findIndex((uniqueProduct) => uniqueProduct.id === product.id);
+    console.log('existingProductIndex', existingProductIndex);
 
     if (existingProductIndex !== -1) {
       uniqueProducts[existingProductIndex].quantity++;
@@ -14,3 +15,4 @@ export function getUniqueProductsWithQuantity(products: Product[]) {
 
   return uniqueProducts;
 }
+
