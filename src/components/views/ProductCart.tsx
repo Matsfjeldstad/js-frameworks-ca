@@ -87,7 +87,7 @@ export default function ProductCart() {
               {sumOfPriceOfAllProducts > 500 ? (
                 <> {sumOfPriceOfAllProducts.toFixed(2)} </>
               ) : (
-                <> {!numberOfProductsInCart ? 0 : Number(sumOfPriceOfAllProducts.toFixed(2)) + 149}kr</>
+                <> {!numberOfProductsInCart ? 0 : (Number(sumOfPriceOfAllProducts) + 149).toFixed(2)}kr</>
               )}
             </div>
           </div>

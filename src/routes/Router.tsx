@@ -3,6 +3,7 @@ import HomePage from '../components/views/HomePage';
 import ProductCart from '../components/views/ProductCart';
 import SpesificProduct from '../components/views/SpesificProduct';
 import OrderSuccess from '../components/views/OrderSuccess';
+import ContactPage from '../components/views/ContactPage';
 
 function Router() {
   return (
@@ -13,6 +14,7 @@ function Router() {
         <Route path="/product/:id" element={<SpesificProduct />} />
         <Route path="/cart" element={<ProductCart />} />
         <Route path="/order-success" element={<OrderSuccess />} />
+        <Route path="/contact-us" element={<ContactPage />} />
       </Routes>
     </>
   );
