@@ -1,6 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
-import { removeSingleProductFromCart } from '../../store/modules/cartSlice';
+import {
+  removeSingleProductFromCart,
+  removeLastProductFromCart,
+  addSingleProductToCart,
+} from '../../store/modules/cartSlice';
 import { Link } from 'react-router-dom';
 import { getUniqueProductsWithQuantity } from '../../utils/cartUtils';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
@@ -42,10 +46,38 @@ export default function ProductCart() {
                     </Link>
                     <div className="text-gray-500 text-xs">{product.tags[0]}</div>
                     <div className="text-lg font-medium">{product.price}kr</div>
-                    <div className="lg:hidden">Qty: {product.quantity}</div>
+                    <div className="lg:hidden flex justify-center items-center gap-2">
+                      <button
+                        className="flex items-center justify-center bg-gray-900 h-8 w-8 text-sm font-medium text-gray-100 hover:text-gray-300"
+                        onClick={() => dispatch(removeLastProductFromCart(product.id))}
+                      >
+                        -
+                      </button>
+                      Qty: {product.quantity}
+                      <button
+                        className="flex items-center justify-center bg-gray-900 h-8 w-8 text-sm font-medium text-gray-100 hover:text-gray-300"
+                        onClick={() => dispatch(addSingleProductToCart(product))}
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className="hidden lg:flex">Qty: {product.quantity}</div>
+                <div className="hidden lg:flex gap-2 justify-center items-center">
+                  <button
+                    className="flex items-center justify-center bg-gray-900 h-8 w-8 text-sm font-medium text-gray-100 hover:text-gray-300"
+                    onClick={() => dispatch(removeLastProductFromCart(product.id))}
+                  >
+                    -
+                  </button>
+                  Qty: {product.quantity}
+                  <button
+                    className="flex items-center justify-center bg-gray-900 h-8 w-8 text-sm font-medium text-gray-100 hover:text-gray-300"
+                    onClick={() => dispatch(addSingleProductToCart(product))}
+                  >
+                    +
+                  </button>
+                </div>
                 <svg
                   width="29"
                   height="29"
